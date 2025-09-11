@@ -1,5 +1,4 @@
-<% layout("/layouts/bolierplate") %>
-<body>
+<% layout("/layouts/bolierplate") %> 
   <h3>All Listings</h3>
 
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
@@ -11,7 +10,7 @@
             <div class="card-body">
               <p class="card-text">
                 <b><%= listing.title %> <br /></b> 
-                &#8377; <%= listing.price.toLocaleString("en-IN") %>
+                &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
               </p>
             </div>
           </div>
@@ -19,4 +18,4 @@
       </div>
     <% } %>
   </div>
-</body>
+
