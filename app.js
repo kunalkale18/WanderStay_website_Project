@@ -18,11 +18,16 @@ const userRouter = require("./routes/user.js");
 const MONGO_URL = "mongodb://127.0.0.1:27017/wonderrLust";
 
 // -------------------- Mongoose Connection --------------------
-mongoose.set("strictQuery", false);
-mongoose.connection.on("connected", () => console.log("✅ Mongoose connected"));
-mongoose.connection.on("error", (err) => console.log("❌ Mongoose connection error:", err));
-mongoose.connection.on("disconnected", () => console.log("⚠️ Mongoose disconnected"));
+main().then(() => {
+    console.log("connected to DB");
+})
+.catch((err) => {
+    console.log(err);
+});
 
+async function main() {
+    await mongoose.connect(MONGO_URL);
+}
 // -------------------- App Setup --------------------
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -60,6 +65,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req,res,next) => {                       // flash created index.ejs success, listing route flash redirect
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
+  res.locals.currUser=req.user;
   next();
 });
 
@@ -76,15 +82,6 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error.ejs", { message });
 });
 
-// -------------------- Start Server --------------------
-async function main() {
-  try {
-    await mongoose.connect(MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
-    console.log("✅ Connected to DB");
-    app.listen(8080, () => console.log("🚀 Server listening on port 8080"));
-  } catch (err) {
-    console.log("❌ DB Connection Error:", err);
-  }
-}
-
-main();
+app.listen(8080, () => {
+    console.log("server is listening to port 8080");
+});
