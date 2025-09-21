@@ -4,7 +4,7 @@ if(process.env.NODE_ENV!="production") {
 // console.log("Cloud Name:", process.env.CLOUDINARY_CLOUD_NAME);
 // console.log("API Key:", process.env.CLOUDINARY_API_KEY);
 // console.log("API Secret exists?", !!process.env.CLOUDINARY_API_SECRET);
-
+// console.log("secret Key:", process.env.SECRET);
 
 const express = require("express");
 const app = express();
@@ -14,6 +14,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -23,7 +24,8 @@ const listingsRouter = require("./routes/listing.js")
 const reviewsRouter = require("./routes/review.js")
 const userRouter = require("./routes/user.js");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wonderrLust";
+// const MONGO_URL = "mongodb://127.0.0.1:27017/wonderrLust";
+const dbUrl = process.env.ATLASDB_URL;
 
 // -------------------- Mongoose Connection --------------------
 main().then(() => {
@@ -34,7 +36,7 @@ main().then(() => {
 });
 
 async function main() {
-    await mongoose.connect(MONGO_URL);
+    await mongoose.connect(dbUrl);
 }
 // -------------------- App Setup --------------------
 app.set("view engine", "ejs");
@@ -44,9 +46,22 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public"))); // css included
 
+const store=MongoStore.create({
+    mongoUrl:dbUrl,
+    crypto: {
+        secret: process.env.SECRET,
+    },
+    touchAfter: 24 * 3600,
+});
+
+store.on("error",() => {
+    console.log("ERROR in MONGO SESSION STORE",err);
+});
+
 //----session creation/cookies---------------
 const sessionOptions = {
-  secret: "mysupersecretcode",
+  store,
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -55,10 +70,6 @@ const sessionOptions = {
     httpOnly: true
   },
 };
-
-// -------------------- Routes --------------------
-app.get("/", (req, res) => res.send("Hi, I am root"));
-
 
 app.use(session(sessionOptions));
 app.use(flash());

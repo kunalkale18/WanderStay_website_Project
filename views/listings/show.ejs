@@ -1,4 +1,14 @@
 <% layout("/layouts/bolierplate") %>
+<style>
+  #map {
+    width: 80%;
+    height: 400px;  /* adjust height as needed */
+    border-radius: 20px; /* adjust curvature */
+    overflow: hidden; /* ensures map tiles stay inside rounded corners */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* optional shadow for nice effect */
+  }
+</style>
+
 <script>
   const mapToken = "<%= process.env.MAP_TOKEN %>";
   const listing=<%-JSON.stringify(listing)%>;

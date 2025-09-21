@@ -1,30 +1,29 @@
 <% layout("/layouts/bolierplate") %>
- <div class="row">
-    <h1 class="col-6 offset-3">Signup to WonderLust</h1>
-   <div class="col-8 offset-3">
-       <form action="/signup" method="POST" class="needs-validation" novalidate>
-            <div class="mb-3">
-             <label for="username" class="form-label">Username</label>
-              <input name="username" id="username" type="text" class="form-control" required/>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
-            </div>
-            <div class="mb-3">
-             <label for="email" class="form-label">Email</label>
-              <input name="email" id="email" type="email" class="form-control" required/>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
-            </div>
-            <div class="mb-3">
-             <label for="password" class="form-label">Password</label>
-              <input name="password" id="password" type="password" class="form-control" required/>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
-            </div>
-            <button class="btn btn-success">Signup</button>
-       </form>
-   </div>
- </div>
+<div class="row justify-content-center mt-5">
+  <div class="col-md-5">
+    <div class="card shadow-lg rounded-3 p-4 auth-card mb-5">
+      <h2 class="text-center mb-4">Signup to WonderLust</h2>
+      <form action="/signup" method="POST" class="needs-validation" novalidate>
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" id="username" name="username" class="form-control" required />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" name="email" class="form-control" required />
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" name="password" class="form-control" required />
+        </div>
+        <div class="d-grid">
+          <button class="btn btn-success">Signup</button>
+        </div>
+      </form>
+      <p class="text-center mt-3">
+        Already have an account?
+        <a href="/login" class="text-decoration-none">Login here</a>
+      </p>
+    </div>
+  </div>
+</div>
