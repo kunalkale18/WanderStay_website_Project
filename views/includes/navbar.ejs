@@ -1,29 +1,66 @@
 <style>
-  .search-btn {
-    background-color: #fe424d;
-    color: #fff;
+.navbar-nav form.d-flex {
+    display: flex;
+    gap: 0.5rem;
+    max-width: 400px;      
+    width: 100%;           
+    margin-left: auto; 
+    align-items: center;     
+}
+
+.search-inp {
+    flex: 1;               
+    min-width: 0;
     border-radius: 25px;
-    padding: 0 1rem 0 1rem;
-  }
-  .search-btn:hover {
-    background-color: #fe424d;
-    color: #fff;
-  }
-  .search-btn i {
-    display: inline;
-    margin-right: 0.5rem;
-  }
-  .search-inp {
-    border-radius: 25px;
-    padding: 0.5rem 3rem 0.5rem 3rem;
+    padding: 0.5rem 1rem;
     font-size: 1rem;
-  }
-  /* Add styling for WanderStay link */
-  .nav-link.wanderstay {
+    border: 1px solid #ccc;
+}
+
+.search-btn {
+    background-color: #fe424d;
+    color: white;
+    border-radius: 25px;
+    padding: 0 1rem;
+    height: 40px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+}
+
+.search-btn:hover {
+    background-color: #d9363e;
+}
+
+.nav-link.wanderstay {
     color: #fe424d !important;
-    font-weight: 500; /* optional for boldness */
+    font-weight: 500;
     margin-left: -1rem;
-  }
+}
+
+@media (max-width: 768px) {
+    .navbar-nav form.d-flex {
+        max-width: 100%;    
+        flex-direction: column; 
+        gap: 0.5rem;
+    }
+    .search-inp, .search-btn {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+        width: 100%; 
+    }
+
+    .navbar-collapse.show {
+        background-color: white; 
+        padding: 1rem;           
+        z-index: 1000;           
+    }
+
+}
 </style>
 
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
@@ -34,22 +71,27 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
+        <!-- WanderStay link instead of Explore -->
         <a class="nav-link wanderstay" href="/listings">WanderStay</a>
       </div>
+
       <div class="navbar-nav ms-auto">
-        <form class="d-flex" role="search">
-          <input class="form-control me-2 search-inp" type="search" placeholder="Search destinations"/>
-          <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+        <form class="d-flex" role="search" action="/listings" method="GET">
+          <input class="form-control me-2 search-inp" type="search" name="q" placeholder="Search destinations"/>
+          <button class="btn search-btn" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i>Search
+          </button>
         </form>
       </div>
+
       <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="/listings/new">WanderStay &nbsp;your home</a>
-        <% if(!currUser) {%>
-        <a class="nav-link" href="/signup"><b>Signup</b></a>
-        <a class="nav-link" href="/login"><b>Login</b></a>
+        <a class="nav-link" href="/listings/new">WanderStay &nbsp; your home</a>
+        <% if (!currUser){ %>
+          <a class="nav-link" href="/signup"><b>Sign up</b></a>
+          <a class="nav-link" href="/login"><b>Log in</b></a>
         <% } %>
-        <% if(currUser) {%>
-        <a class="nav-link" href="/logout"><b>LogOut</b></a>
+        <% if (currUser){ %>
+          <a class="nav-link" href="/logout"><b>Log out</b></a>
         <% } %>
       </div>
     </div>

@@ -1,7 +1,9 @@
-<% layout("/layouts/bolierplate") %> 
+<% layout("/layouts/bolierplate") %>
+
 <style>
+  /* Filters container */
   #filters {
-    display:flex;
+    display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 1rem;
@@ -22,14 +24,14 @@
 
   .filter p {
     font-size: 0.8rem;
-    position: relative; /* so we can position the underline */
-    display: inline-block; /* keeps the underline only as wide as the text */
+    position: relative;
+    display: inline-block;
   }
 
   .filter p::after {
     content: "";
     position: absolute;
-    bottom: -3px; /* little below the text */
+    bottom: -3px;
     left: 0;
     width: 0;
     height: 2px;
@@ -38,16 +40,12 @@
   }
 
   .filter:hover p::after {
-    width: 100%; /* animate underline on hover */
+    width: 100%;
   }
 
   .filter i {
     font-size: 1.2rem;
-    margin-bottom: 0.25rem; /* space between icon and text */
-  }
-
-  .tax-info {
-    display: none;
+    margin-bottom: 0.25rem;
   }
 
   .tax-toggle {
@@ -60,7 +58,6 @@
     align-items: center;
   }
 
-  /* Added heart favorite styles */
   .listing-card {
     position: relative;
   }
@@ -74,10 +71,8 @@
     user-select: none;
     transition: color 0.3s ease;
     z-index: 10;
-
-    /* Thin white border around heart */
-    -webkit-text-stroke: 1px white; /* Safari/Chrome */
-    text-stroke: 1px white; /* Standard */
+    -webkit-text-stroke: 1px white;
+    text-stroke: 1px white;
   }
   .favorite-heart.red {
     color: red;
@@ -85,46 +80,69 @@
     text-stroke: 1px white;
   }
 
+  /* MOBILE SCROLLABLE FILTERS */
+  @media (max-width: 768px) {
+    #filters {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      padding: 0.5rem 1rem;
+      gap: 1rem;
+      scroll-behavior: smooth;
+    }
+
+    .filter, .tax-toggle {
+      flex: 0 0 auto;
+      margin-top: 0;
+      scroll-snap-align: start;
+    }
+
+    #filters::-webkit-scrollbar {
+      display: none;
+    }
+  }
 </style>
 
+<!-- Filters bar -->
 <div id="filters">
-  <div class="filter">
+  <div class="filter" onclick="window.location.href='/listings'">
       <div><i class="fa-solid fa-fire"></i></div>
       <p>Trending</p>
   </div>
-  <div class="filter">
+  <div class="filter" onclick="window.location.href='/listings'">
       <div><i class="fa-solid fa-bed"></i></div>
       <p>Rooms</p>
   </div>
-  <div class="filter">
+  <div class="filter" onclick="window.location.href='/listings'">
       <div><i class="fa-solid fa-mountain-city"></i></div>
       <p>Iconic Cities</p>
   </div>
-  <div class="filter">
+  <div class="filter" onclick="window.location.href='/listings'">
       <div><i class="fa-solid fa-mountain"></i></div>
       <p>Mountains</p>
   </div>
-  <div class="filter">
+  <div class="filter" onclick="window.location.href='/listings'">
       <div><i class="fa-solid fa-house-chimney"></i></div>
       <p>Castles</p>
   </div>
-  <div class="filter">
+  <div class="filter" onclick="window.location.href='/listings'">
       <div><i class="fa-solid fa-person-swimming"></i></div>
       <p>Amazing Pools</p>
   </div>
-  <div class="filter">
+  <div class="filter" onclick="window.location.href='/listings'">
       <div><i class="fa-solid fa-campground"></i></div>
       <p>Camping</p>
   </div>
-  <div class="filter">
+  <div class="filter" onclick="window.location.href='/listings'">
       <div><i class="fa-solid fa-cow"></i></div>
       <p>Farms</p>
   </div>
-  <div class="filter">
+  <div class="filter" onclick="window.location.href='/listings'">
       <div><i class="fa-solid fa-snowflake"></i></div>
       <p>Arctic</p>
   </div>
-  <div class="filter">
+  <div class="filter" onclick="window.location.href='/listings'">
       <div><i class="fa-solid fa-igloo"></i></div>
       <p>Domes</p>
   </div>
@@ -136,13 +154,13 @@
   </div>
 </div>
 
+<!-- Listings -->
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
   <% for(let listing of allListings) { %>
     <div class="col">
       <a href="/listings/<%= listing._id %>" class="listing-link">
         <div class="card listing-card">
           <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem; object-fit: cover;">
-          <!-- Heart icon added -->
           <div class="favorite-heart">&#10084;</div>
           <div class="card-body">
             <p class="card-text">
@@ -166,10 +184,9 @@
     }
   });
 
-  // Heart toggle logic
   document.querySelectorAll('.favorite-heart').forEach(heart => {
     heart.addEventListener('click', (e) => {
-      e.preventDefault(); // Prevent link navigation if needed
+      e.preventDefault();
       heart.classList.toggle('red');
     });
   });

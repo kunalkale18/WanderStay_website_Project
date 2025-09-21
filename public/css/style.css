@@ -1,52 +1,46 @@
-body{
-     font-family: "Plus Jakarta Sans", sans-serif !important;
-     display: flex;
-     flex-direction: column;
-     min-height: 100vh;
+body {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }     
 
-.container{
-   flex: 1;
+.container {
+    flex: 1;
 }
 
-.navbar{
+/* Navbar */
+.navbar {
     height: 5rem;
     background-color: white;
 }
-
-.fa-compass{
+.fa-compass {
     color: #fe424d;
     font-size: 2rem;
 }
-
-.nav-links{
+.nav-links {
     color: #222222 !important;
 }
 
-.f-info-links a{
+/* Footer */
+.f-info-links a {
     text-decoration: none;
     color: #222222;
 }
-
 .f-info-links a:hover {
-    text-decoration:underline;
+    text-decoration: underline;
 }
-
-.f-info-links{
-    width: 100%;
-}
-.f-info-links,.f-info-socials,.f-info-brand{
+.f-info-links, .f-info-socials, .f-info-brand {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
-.f-info-socials i{
+.f-info-socials i {
     font-size: 1.2rem;
     margin-right: 1rem;
 }
-.f-info{
+.f-info {
     text-align: center;
     height: 8rem;
     background-color: #ebebeb;
@@ -55,69 +49,87 @@ body{
     justify-content: center;
 }
 
-/* cards */
-.listing-card{
-   border: none !important;
-   margin-bottom: 2rem;
+/* Listing cards */
+.listing-card {
+    border: none !important;
+    margin-bottom: 2rem;
 }
-
-.card-img-top{
+.card-img-top {
     border-radius: 1rem !important;
-    width: 100% ;
+    width: 100%;
     object-fit: cover !important;
 }
-
-.card-body{
+.card-body {
     padding: 0 !important;
 }
-.card-text p{
+.card-text p {
     font-weight: 400;
 }
-
-.listing-link{
+.listing-link {
     text-decoration: none;
 }
 
-/* card effect */
-.card-img-overlay{
+/* Card hover effect */
+.card-img-overlay {
     opacity: 0;
 }
-
-.card-img-overlay:hover{
+.card-img-overlay:hover {
     opacity: 0.2;
     background-color: white;
 }
 
-/* new page */
-.add-btn{
-    background-color:  #fe424d !important;
+/* Buttons */
+.add-btn, .edit-btn, .show-btn-edit {
+    background-color: #fe424d !important;
     border: none !important;
 }
 
-/* edit page */
-.edit-btn{
-    background-color:  #fe424d !important;
-    border: none !important;
-}
-
-/* show page */
-.show-img{
+/* Show page image and map */
+.show-img {
     height: 30vh;
 }
-
-.show-btn-edit{
-   background-color: #fe424d !important;
-   border: none !important;
-   margin-right: 1rem !important;
-   margin-bottom: 2.2rem;
-}
-
-.btns{
-    display: flex;
-}
-
-/* map */
-#map { 
+#map {
     height: 400px;
-    width: 100vh;
- }
+    width: 80%;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+/* Edit/Delete buttons container */
+.btns {
+    display: flex;
+    gap: 1rem; /* space between buttons on desktop */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .show-img {
+        height: 25vh;
+    }
+    #map {
+        width: 100%;
+        height: 300px;
+    }
+    .col-8.offset-3, .col-6.offset-3 {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .btns {
+        flex-wrap: wrap;
+        gap: 0.5rem; /* reduce gap for smaller screens */
+    }
+    .btns .btn {
+        flex: 1 1 auto;
+        min-width: 120px;
+    }
+
+    /* Reviews cards responsive */
+    .row .card.col-5 {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
