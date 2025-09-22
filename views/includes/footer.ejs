@@ -1,14 +1,41 @@
 <footer>
-    <div class="f-info">
-        <div class="f-info-socials">
-            <i class="fa-brands fa-square-facebook"></i>
-            <i class="fa-brands fa-square-instagram"></i>
-            <i class="fa-brands fa-linkedin"></i>
-        </div>
-        <div class="f-info-brand"> &copy; WonderLust private limited</div>
-        <div class="f-info-links">
-            <a href="/privacy">Privacy</a>
-            <a href="/terms">Terms</a>
-        </div>
+  <style>
+    /* Keep Font Awesome icon colors even inside links */
+    .f-info-socials a {
+      color: inherit;        /* prevents the link from turning blue */
+      text-decoration: none; /* removes underline if any */
+    }
+
+    .f-info-socials a i {
+      color: inherit;        /* use the icon's default color */
+      font-size: 1.5rem;     /* optional: adjust icon size if needed */
+    }
+
+    /* Optional: spacing between icons */
+    .f-info-socials a:not(:last-child) {
+      margin-right: 1rem;
+    }
+  </style>
+
+  <div class="f-info">
+    <div class="f-info-socials">
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/kunal-kale-007k1" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-linkedin"></i>
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/vaibhavpatil_art?utm_source=qr&igsh=MXR5Z2JyenVtZnY4YQ==" 
+         target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-square-instagram"></i>
+      </a>
     </div>
+
+    <div class="f-info-brand"> &copy; WonderLust private limited</div>
+
+    <div class="f-info-links">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+  </div>
 </footer>
