@@ -24,8 +24,7 @@ const listingsRouter = require("./routes/listing.js")
 const reviewsRouter = require("./routes/review.js")
 const userRouter = require("./routes/user.js");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wonderrLust";
-// const dbUrl = process.env.ATLASDB_URL;
+const dbUrl = process.env.ATLASDB_URL;
 
 // -------------------- Mongoose Connection --------------------
 main().then(() => {
@@ -36,7 +35,7 @@ main().then(() => {
 });
 
 async function main() {
-    await mongoose.connect(MONGO_URL);
+    await mongoose.connect(dbUrl);
 }
 // -------------------- App Setup --------------------
 app.set("view engine", "ejs");
@@ -47,7 +46,7 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public"))); // css included
 
 const store=MongoStore.create({
-    mongoUrl:MONGO_URL,
+    mongoUrl:dbUrl,
     crypto: {
         secret: process.env.SECRET,
     },
