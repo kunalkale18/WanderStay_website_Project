@@ -120,17 +120,15 @@ WanderStay/
 
 ---
 
-### ➕ Add Property
+### ➕ Add Listing
 
-![Add Property](screenshots/add-property.png)
-
----
-
-### 🏡 Property Details
-
-![Property Details](screenshots/property-details.png)
+![Add Listing](screenshots/add-listing.png)
 
 ---
+
+### 🏡 Listing Details
+
+![Listing Details](screenshots/listing-details.png)
 
 ## 🚀 Key Functionalities
 
